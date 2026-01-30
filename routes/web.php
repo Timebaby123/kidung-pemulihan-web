@@ -1,7 +1,6 @@
 <?php
 
+use App\Http\Controllers\SuplemenController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get("/suplemen/{id}", [SuplemenController::class,"index"])->name('SuplemenPage');
