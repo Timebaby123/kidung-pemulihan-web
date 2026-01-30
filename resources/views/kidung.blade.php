@@ -41,5 +41,13 @@
             <p class="justify-self-center-safe w-64 pl-4">{!! nl2br(($data->isi)) !!}</p>
         </div>
     </div>
+    {{-- Desktop Isinya --}}
+    <div class="sm:block hidden pl-5">
+        <h4 class="text-2xl font-bold mt-10">Suplemen No. {{ $data->no_kidung }}</h4>
+        <h4 class="text-2xl font-bold mt-1">{{ $data->judul }}</h4>
+        <div class="mt-5 ">
+            <p class=" text-xl font-semi-bold">{!! nl2br(($data->isi)) !!}</p>
+        </div>
+    </div>
 </body>
 </html>
