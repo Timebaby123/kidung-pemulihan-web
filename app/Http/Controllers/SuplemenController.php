@@ -10,6 +10,7 @@ class SuplemenController extends Controller
     public function index(int $no_kidung)
     {
         $data = Suplemen::where("no_kidung", $no_kidung)->first();
-        return view('kidung', compact('data'));
+        $method = 0;
+        return view('kidung', compact('data','method'));
     }
 }

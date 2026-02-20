@@ -38,27 +38,21 @@
 <body>
     {{-- Mobile isinya --}}
     <div class="sm:hidden">
-        @if($method == 0)
-            <h4 class="text-center font-bold mt-5">Suplemen No. {{ $data->no_kidung }}</h4>
-        @else
-            <h4 class="text-center font-bold mt-5">Kidung No. {{ $data->no_kidung }}</h4>
-        @endif
-        <h4 class="text-center font-bold mt-1">{{ $data->judul }}</h4>
-        <div class=" mt-3 ">
-            <p class="justify-self-center-safe w-64 pl-4">{!! nl2br(($data->isi)) !!}</p>
-        </div>
+        @foreach($data as $single_data)
+            <h4 class="text-center font-bold mt-5">Kidung No. {{ $single_data->no_kidung }}</h4>
+            <p class="text-center">{{ $single_data->judul }}</p>
+        @endforeach
+       
+        
     </div>
     {{-- Desktop Isinya --}}
     <div class="sm:block hidden pl-5">
-        @if($method == 0)
-            <h4 class="text-2xl font-bold mt-10">Suplemen No. {{ $data->no_kidung }}</h4>
-        @else
-            <h4 class="text-2xl font-bold mt-10">Kidung No. {{ $data->no_kidung }}</h4>
-        @endif
-        <h4 class="text-2xl font-bold mt-1">{{ $data->judul }}</h4>
-        <div class="mt-5 ">
-            <p class=" text-xl font-semi-bold">{!! nl2br(($data->isi)) !!}</p>
-        </div>
+        @foreach($data as $single_data)
+        <a href="/kidung/{{ $single_data->no_kidung }}"><div>
+            <h4 class="font-bold mt-10">Kidung No. {{ $single_data->no_kidung }}</h4>
+            <p class="">{{ $single_data->judul }}</p>
+        </div></a>
+        @endforeach
     </div>
 </body>
 </html>
