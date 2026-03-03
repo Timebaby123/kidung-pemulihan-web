@@ -15,6 +15,7 @@ class SearchController extends Controller
         if (is_numeric($request->search)) {
             $data_kidung = Kidung::where('no_kidung', 'like', $request->search . '%')->get();
             $data_suplemen = Suplemen::where('no_kidung', 'like', $request->search . '%')->get();
+            return view('search', compact('data_kidung', 'data_suplemen'));
         } else {
             $data_kidung = Kidung::where('judul', 'like', '%' . $request->search . '%')->orWhere('isi', 'like', '%' . $request->search . '%')->get();
             $data_suplemen = Suplemen::where('judul', 'like', '%' . $request->search . '%')->get();

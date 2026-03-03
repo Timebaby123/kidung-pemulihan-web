@@ -5,9 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite('resources/css/app.css')
+     @php
+    $isProduction = app()->environment('production');
+    $manifestPath = $isProduction ? '../public_html/build/manifest.json' : public_path('build/manifest.json');
+ @endphp
+ 
+  @if ($isProduction && file_exists($manifestPath))
+   @php
+    $manifest = json_decode(file_get_contents($manifestPath), true);
+   @endphp
+    <link rel="stylesheet" href="{{ config('app.url') }}/build/{{ $manifest['resources/css/app.css']['file'] }}">
+    <script type="module" src="{{ config('app.url') }}/build/{{ $manifest['resources/js/app.js']['file'] }}"></script>
+  @else
+    @viteReactRefresh
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
+  @endif
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <title>Document</title>
+    <title>Kidung</title>
     {{-- Desktop Navbar --}}
     <nav class="hidden sm:flex justify-between items-center justify-items-center shadow-xs">
         <div>
@@ -58,10 +72,10 @@
         <p class="mt-3 ml-3">Cari kidung</p>
         <form action="{{ route('Search') }}" method="GET">
             @csrf
-            <div class="ml-3   w-32 flex">
-                <input name="search" type="text" class="border-b focus:outline-0">
+            <div class="ml-3 flex">
+                <input name="search" type="text" class="border-b focus:outline-0 w-40">
                 <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke-width="1.5" stroke="currentColor" class="ml-3 size-5">
+                        stroke-width="1.5" stroke="currentColor" class="ml-1 size-5">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                     </svg></button>
