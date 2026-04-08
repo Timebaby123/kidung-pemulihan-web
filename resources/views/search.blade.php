@@ -91,7 +91,7 @@
     <div class="sm:hidden">
 
         @foreach($data_kidung as $single_data)
-            <a href="kidung/{{ $single_data->id}}">
+            <a href="kidung/{{ $single_data->no_kidung}}">
                 <div>
                     <h4 class="text-center font-bold mt-5">Kidung No. {{ $single_data->no_kidung }}</h4>
                     <p class="text-center">{{ $single_data->judul }}</p>
